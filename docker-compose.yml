@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    container_name: demyst-todo-cli-app
+    command: ["npm", "test"]
+    volumes:
+      - .:/usr/src/app
+    tty: true
