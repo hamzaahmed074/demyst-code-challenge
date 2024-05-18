@@ -16,14 +16,19 @@ async function fetchTodos() {
       todoPromises.push(axios.get(`https://jsonplaceholder.typicode.com/todos/${i}`));
     }
 
-    const todos = await Promise.all(todoPromises);
+    const todos = await Promise.allSettled(todoPromises);
 
-    todos.forEach(todo => {
-      const { title, completed } = todo.data;
-      console.log(`Title: ${title} - Completed: ${completed}`);
+    todos.forEach((result, index) => {
+      if (result.status === 'fulfilled') {
+        const { title, completed } = result.value.data;
+        console.log(`Title: ${title} - Completed: ${completed}`);
+      } else {
+        console.error(`Failed to fetch TODO ${index * 2 + 2}: ${result.reason}`);
+      }
     });
   } catch (error) {
-    console.error('Error fetching TODOs:', error);
-    throw error;
+    throw new Error("Error fetching TODOs");
   }
 }
+
+module.exports = { fetchTodos };
