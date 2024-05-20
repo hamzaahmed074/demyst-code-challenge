@@ -34,3 +34,18 @@ Submit a GitHub / Bitbucket repo for review. No ZIP files!
 ### Do I need to write tests for connecting to API ?
 
 That can be ommitted.
+
+
+### How to run the application
+
+- npm install
+- demyst-todo-cli fetch
+
+### How to test the application
+
+- npm test
+
+### How to run using Docker
+
+- docker-compose build
+- docker-compose up
